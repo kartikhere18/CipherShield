@@ -1,23 +1,24 @@
 CipherShield
-Overview
+Overview:
 
 CipherShield is a browser-based cybersecurity intelligence suite developed as an academic cybersecurity project.
 
 It demonstrates:
 
-AES-256 encryption/decryption
-Network vulnerability scanning simulation
-Browser fingerprinting
-Encoding & cryptography tools
-Cybersecurity awareness training quiz
+AES-256 encryption/decryption,
+Network vulnerability scanning simulation,
+Browser fingerprinting,
+Encoding & cryptography tools,
+Cybersecurity awareness training quiz.
 
 Built using:
 
-HTML5
-TailwindCSS
-JavaScript
-CryptoJS
-Features
+HTML5,
+TailwindCSS,
+JavaScript,
+CryptoJS,
+Features.
+
 🔐 AES Data Vault
 
 Encrypts and decrypts sensitive data using AES encryption.
@@ -34,14 +35,15 @@ Displays information websites can detect from browsers.
 
 Converts text into:
 
-Base64
-Hexadecimal
-Binary
+Base64,
+Hexadecimal,
+Binary.
+
 🧠 Cybersecurity Quiz
 
 Interactive threat detection awareness module.
 
-Screenshots
+Screenshots:
 
 <img width="1912" height="913" alt="image" src="https://github.com/user-attachments/assets/cd0fe620-5284-4b73-becd-e00da436f728" />
 <img width="1906" height="911" alt="image" src="https://github.com/user-attachments/assets/5509b3e5-012e-4981-b571-f512de0fe7b4" />
@@ -59,16 +61,16 @@ Educational Purpose
 
 This project was developed for cybersecurity learning purposes and demonstrates core concepts in:
 
-Encryption
-Network security
-Digital privacy
-Cyber awareness
-Future Improvements
-Real API-based vulnerability scanning
-Authentication system
-Secure backend integration
-File encryption support
-Threat intelligence dashboard
-Author
+Encryption,
+Network security,
+Digital privacy,
+Cyber awareness,
+Future Improvements,
+Real API-based vulnerability scanning,
+Authentication system,
+Secure backend integration,
+File encryption support,
+Threat intelligence dashboard,
 
-Your Name
+Author
+Kartik Malik
