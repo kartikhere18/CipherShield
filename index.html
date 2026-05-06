@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CipherShield - Cybersecurity Intelligence Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2 group">
+                <i data-lucide="shield-alert" class="text-[var(--color-secondary)] w-8 h-8 group-hover:rotate-12 transition duration-300"></i>
+                <span class="text-3xl font-extrabold tracking-tight text-[var(--color-primary)]">Cipher<span class="text-[var(--color-secondary)]">Shield</span></span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-lg font-medium">
+                <a href="#mission" class="text-gray-600 hover:text-[var(--color-secondary)] transition">Mission</a>
+                <a href="#dashboard" class="text-gray-600 hover:text-[var(--color-secondary)] transition">Live Ops</a>
+                <a href="#about" class="text-gray-600 hover:text-[var(--color-secondary)] transition">About</a>
+            </nav>
+            
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#dashboard" class="px-5 py-2 bg-[var(--color-primary)] text-white font-semibold rounded-lg shadow-md hover:bg-[var(--color-secondary)] transition duration-300">
+                    Launch Console
+                </a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 focus:outline-none">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 py-4 px-4 space-y-3 shadow-lg">
+            <a href="#mission" class="block text-gray-600 font-medium">Mission</a>
+            <a href="#dashboard" class="block text-gray-600 font-medium">Live Ops</a>
+            <a href="#about" class="block text-gray-600 font-medium">About</a>
+            <a href="#dashboard" class="block w-full text-center px-4 py-2 bg-[var(--color-secondary)] text-white rounded-lg">Launch Console</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section id="mission" class="bg-[var(--color-primary)] text-white py-20 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+                <i data-lucide="binary" class="w-full h-full text-white"></i>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div class="inline-block px-4 py-1 mb-4 rounded-full bg-gray-800 border border-gray-700 text-sm font-mono text-[var(--color-secondary)]">
+                    v3.0 System Online
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                    Real Data Protection.<br>
+                    <span class="text-[var(--color-secondary)]">Simplified.</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                    CipherShield provides active AES encryption tools, network scanning simulations, and digital footprint analysis directly in your browser.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#dashboard" class="px-8 py-3 bg-[var(--color-secondary)] text-white font-bold rounded-lg shadow-lg hover:bg-white hover:text-[var(--color-primary)] transition duration-300">
+                        Initialize Tools
+                    </a>
+                    <a href="#about" class="px-8 py-3 border border-gray-500 text-gray-300 font-bold rounded-lg hover:border-white hover:text-white transition">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-[var(--color-primary)]">CipherShield Operations Center</h2>
+                    <p class="text-gray-600 mt-2 font-mono text-sm">Select a module to begin analysis.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-8">
+                    <button onclick="switchTool('scanner')" id="tab-scanner" class="tool-tab active-tab bg-white p-3 rounded-xl shadow border-2 border-[var(--color-secondary)] flex flex-col items-center justify-center transition hover:bg-sky-50">
+                        <i data-lucide="radar" class="text-[var(--color-secondary)] mb-1"></i>
+                        <span class="font-bold text-xs md:text-sm text-gray-800">Scanner</span>
+                    </button>
+                    <button onclick="switchTool('vault')" id="tab-vault" class="tool-tab bg-white p-3 rounded-xl shadow border-2 border-transparent flex flex-col items-center justify-center transition hover:bg-sky-50">
+                        <i data-lucide="lock" class="text-gray-500 mb-1"></i>
+                        <span class="font-bold text-xs md:text-sm text-gray-800">Data Vault</span>
+                    </button>
+                    <button onclick="switchTool('crypto')" id="tab-crypto" class="tool-tab bg-white p-3 rounded-xl shadow border-2 border-transparent flex flex-col items-center justify-center transition hover:bg-sky-50">
+                        <i data-lucide="file-lock-2" class="text-gray-500 mb-1"></i>
+                        <span class="font-bold text-xs md:text-sm text-gray-800">Crypto Lab</span>
+                    </button>
+                    <button onclick="switchTool('fingerprint')" id="tab-fingerprint" class="tool-tab bg-white p-3 rounded-xl shadow border-2 border-transparent flex flex-col items-center justify-center transition hover:bg-sky-50">
+                        <i data-lucide="fingerprint" class="text-gray-500 mb-1"></i>
+                        <span class="font-bold text-xs md:text-sm text-gray-800">Fingerprint</span>
+                    </button>
+                    <button onclick="switchTool('quiz')" id="tab-quiz" class="tool-tab bg-white p-3 rounded-xl shadow border-2 border-transparent flex flex-col items-center justify-center transition hover:bg-sky-50">
+                        <i data-lucide="brain-circuit" class="text-gray-500 mb-1"></i>
+                        <span class="font-bold text-xs md:text-sm text-gray-800">Quiz</span>
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden min-h-[500px]">
+                    
+                    <div id="view-scanner" class="tool-view p-8">
+                        <div class="max-w-3xl mx-auto">
+                            <h3 class="text-2xl font-bold text-[var(--color-primary)] mb-4 flex items-center">
+                                <i data-lucide="network" class="w-6 h-6 mr-2"></i> Network Vulnerability Scanner
+                            </h3>
+                            <div class="flex space-x-2 mb-6">
+                                <input type="text" id="target-ip" placeholder="Enter Target IP (e.g., 192.168.1.1)" class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] font-mono">
+                                <button onclick="runScanner()" class="px-6 py-3 bg-[var(--color-primary)] text-white font-bold rounded-lg hover:bg-slate-700 transition">
+                                    Execute Scan
+                                </button>
+                            </div>
+                            
+                            <div class="bg-[#1e293b] rounded-lg p-4 font-mono text-sm shadow-inner h-80 overflow-y-auto border border-gray-700">
+                                <div class="flex justify-between border-b border-gray-600 pb-2 mb-2">
+                                    <span class="text-gray-400 text-xs">ciphershield_console v1.0 -- bash</span>
+                                    <div class="flex space-x-1.5">
+                                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                    </div>
+                                </div>
+                                <div id="scanner-output" class="text-green-400 space-y-1">
+                                    <span class="text-gray-500 opacity-50">// System Ready. Waiting for target input...</span>
+                                    <br>
+                                    <span>user@ciphershield:~$ <span class="cursor-blink">_</span></span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2 text-center">*Simulation Only: No real network packets are transmitted.</p>
+                        </div>
+                    </div>
+
+                    <div id="view-vault" class="tool-view hidden p-8">
+                        <div class="max-w-2xl mx-auto">
+                            <h3 class="text-2xl font-bold text-[var(--color-primary)] mb-2 text-center">AES Data Vault (Active Protection)</h3>
+                            <p class="text-gray-500 text-center mb-6">Enter sensitive text and a secret key to encrypt it using AES-256 (Military Grade).</p>
+                            
+                            <div class="space-y-4">
+                                <textarea id="vault-input" placeholder="Enter text to encrypt (or paste encrypted code to decrypt)..." class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[var(--color-secondary)] h-32 font-mono"></textarea>
+                                
+                                <div class="relative">
+                                    <input type="password" id="vault-key" placeholder="Enter a Secret Key (Password)" class="w-full p-3 pl-10 border rounded-lg">
+                                    <i data-lucide="key" class="absolute left-3 top-3.5 text-gray-400 w-5 h-5"></i>
+                                </div>
+                                
+                                <div class="flex space-x-2">
+                                    <button onclick="encryptData()" class="flex-1 bg-[var(--color-primary)] text-white py-3 rounded hover:bg-slate-700 font-bold flex items-center justify-center gap-2">
+                                        <i data-lucide="lock" class="w-4 h-4"></i> Encrypt
+                                    </button>
+                                    <button onclick="decryptData()" class="flex-1 bg-[var(--color-secondary)] text-white py-3 rounded hover:opacity-90 font-bold flex items-center justify-center gap-2">
+                                        <i data-lucide="unlock" class="w-4 h-4"></i> Decrypt
+                                    </button>
+                                </div>
+
+                                <div class="bg-slate-100 p-4 rounded border border-gray-300 mt-4">
+                                    <p class="text-xs font-bold text-gray-500 uppercase">Result:</p>
+                                    <p id="vault-result" class="font-mono text-sm break-all text-gray-800 mt-1 min-h-[20px]">...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="view-crypto" class="tool-view hidden p-8">
+                        <div class="max-w-3xl mx-auto">
+                            <h3 class="text-2xl font-bold text-[var(--color-primary)] mb-2 text-center">Cryptography & Encoding Lab</h3>
+                            <p class="text-center text-gray-500 mb-6">Type text below to see how it looks in different machine formats.</p>
+                            
+                            <textarea id="crypto-input" onkeyup="runCrypto()" placeholder="Type a secret message..." class="w-full p-4 border border-gray-300 rounded-lg mb-6 focus:ring-2 focus:ring-[var(--color-secondary)] h-24 font-mono"></textarea>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-slate-50 p-4 rounded-lg border border-gray-200">
+                                    <div class="text-xs font-bold text-gray-400 uppercase mb-1">Base64 (Web Encoding)</div>
+                                    <div id="out-base64" class="font-mono text-[var(--color-secondary)] break-all">...</div>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-lg border border-gray-200">
+                                    <div class="text-xs font-bold text-gray-400 uppercase mb-1">Hexadecimal</div>
+                                    <div id="out-hex" class="font-mono text-emerald-600 break-all">...</div>
+                                </div>
+                                <div class="bg-slate-900 p-4 rounded-lg border border-gray-800 md:col-span-2">
+                                    <div class="text-xs font-bold text-gray-400 uppercase mb-1">Binary (Machine Code)</div>
+                                    <div id="out-binary" class="font-mono text-green-400 text-xs break-all">...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="view-fingerprint" class="tool-view hidden p-8">
+                        <div class="max-w-2xl mx-auto text-center">
+                            <h3 class="text-2xl font-bold text-[var(--color-primary)] mb-2">Browser Fingerprinting</h3>
+                            <p class="text-gray-500 mb-8">This demonstrates what data websites can extract from your browser without permission.</p>
+                            
+                            <div class="bg-white border border-gray-200 rounded-xl overflow-hidden text-left shadow-sm">
+                                <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                                    <span class="font-medium text-gray-600">User Agent String</span>
+                                    <i data-lucide="eye" class="w-4 h-4 text-gray-400"></i>
+                                </div>
+                                <div class="p-4 font-mono text-xs text-gray-500 break-all bg-slate-50" id="fp-ua">Loading...</div>
+                                
+                                <div class="grid grid-cols-2 divide-x divide-gray-100 border-t border-gray-100">
+                                    <div class="p-6 text-center">
+                                        <div class="text-3xl font-bold text-[var(--color-primary)]" id="fp-os">--</div>
+                                        <div class="text-sm text-gray-400 uppercase tracking-wider mt-1">OS Platform</div>
+                                    </div>
+                                    <div class="p-6 text-center">
+                                        <div class="text-3xl font-bold text-[var(--color-secondary)]" id="fp-res">--</div>
+                                        <div class="text-sm text-gray-400 uppercase tracking-wider mt-1">Resolution</div>
+                                    </div>
+                                    <div class="p-6 text-center border-t border-gray-100">
+                                        <div class="text-3xl font-bold text-indigo-600" id="fp-lang">--</div>
+                                        <div class="text-sm text-gray-400 uppercase tracking-wider mt-1">Language</div>
+                                    </div>
+                                    <div class="p-6 text-center border-t border-gray-100">
+                                        <div class="text-3xl font-bold text-purple-600" id="fp-cores">--</div>
+                                        <div class="text-sm text-gray-400 uppercase tracking-wider mt-1">CPU Cores</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="view-quiz" class="tool-view hidden p-8">
+                        <div class="max-w-2xl mx-auto">
+                            <h3 class="text-2xl font-bold text-[var(--color-primary)] mb-2 text-center">Threat Detection Training</h3>
+                            <p class="text-gray-500 text-center mb-8">Identify the attack vector in the scenarios below.</p>
+                            
+                            <div id="quiz-container" class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                                <div id="quiz-question-area">
+                                    <h4 class="text-lg font-semibold mb-4" id="quiz-q">Question 1</h4>
+                                    <div class="space-y-3">
+                                        <button onclick="answerQuiz(0)" class="w-full text-left p-3 border rounded hover:bg-sky-50 hover:border-[var(--color-secondary)] transition font-medium text-gray-700">Option A</button>
+                                        <button onclick="answerQuiz(1)" class="w-full text-left p-3 border rounded hover:bg-sky-50 hover:border-[var(--color-secondary)] transition font-medium text-gray-700">Option B</button>
+                                        <button onclick="answerQuiz(2)" class="w-full text-left p-3 border rounded hover:bg-sky-50 hover:border-[var(--color-secondary)] transition font-medium text-gray-700">Option C</button>
+                                    </div>
+                                </div>
+                                
+                                <div id="quiz-result-area" class="hidden text-center">
+                                    <div class="mb-4">
+                                        <i data-lucide="award" class="w-16 h-16 text-[var(--color-secondary)] mx-auto mb-2"></i>
+                                        <h4 class="text-2xl font-bold">Assessment Complete!</h4>
+                                    </div>
+                                    <p class="text-lg mb-6">Security Score: <span id="quiz-score" class="font-bold text-[var(--color-primary)]"></span></p>
+                                    <button onclick="resetQuiz()" class="px-6 py-2 bg-[var(--color-primary)] text-white rounded hover:bg-slate-700">Retry Assessment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <section id="about" class="py-12 bg-white border-t border-gray-200">
+             <div class="max-w-4xl mx-auto px-4 text-center">
+                <h2 class="text-2xl font-bold text-[var(--color-primary)] mb-4">Why CipherShield?</h2>
+                <p class="text-gray-600">
+                    We combine active security utilities with education. Our mission is to provide tools like the <span class="font-bold">AES Data Vault</span> for real encryption, while demystifying threats like <span class="font-mono bg-gray-100 px-1 rounded text-red-500">Phishing</span> and <span class="font-mono bg-gray-100 px-1 rounded text-red-500">Packet Sniffing</span>.
+                </p>
+             </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[var(--color-primary)] text-gray-400 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0 flex items-center space-x-2">
+                 <i data-lucide="shield" class="w-5 h-5"></i>
+                 <span class="text-white font-bold">CipherShield</span>
+            </div>
+            <p class="text-sm">&copy; <span id="year"></span> CipherShield Security Labs. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+</html>

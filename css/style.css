@@ -1,0 +1,23 @@
+        :root {
+            /* CipherShield Theme: Deep Navy & Electric Cyan */
+            --color-primary: #0f172a; /* Slate 900 (Very Dark Blue) */
+            --color-secondary: #0ea5e9; /* Sky 500 (Electric Blue) */
+            --color-accent: #6366f1; /* Indigo (For "Encryption" vibe) */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            scroll-behavior: smooth;
+        }
+        /* Custom Scrollbar for Terminal */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Terminal blinking cursor */
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
